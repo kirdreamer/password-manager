@@ -4,4 +4,4 @@ import MainMenu
 
 main :: IO ()
 main = do
-  callMenu "1"
+  callMenu "-1"
