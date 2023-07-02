@@ -3,6 +3,7 @@
 module MainMenu(callMenu) where
 
 import Password
+import PasswordGenerator
 
 callMenu :: [Char] -> IO ()
 callMenu "-1" = do
@@ -35,6 +36,7 @@ passwordMenu "-1" = do
 passwordMenu "1" = do
     password <- fillPasswordInfo
     print password
+    passwordMenu "-1"
 
 
 passwordMenu _ = do
@@ -59,12 +61,30 @@ fillPasswordInfo = do
     login <- getLine
     putStr "Url > "
     url <- getLine
-    return Password {title = title, login = login, url = url, password = generatePassword}
+    password <- generateNewPassword "1"
+    return Password {title = title, login = login, url = url, password = password}
 
--- Make a new class with password generation
-generatePassword :: String
-generatePassword = 
-    "12" ++ "34"
+generateNewPassword :: String -> IO String
+generateNewPassword "1" = do 
+    printDelimeter
+    putStr "Enter the length of the password >"
+    lengthStr <- getLine
+    let passwordLength = read lengthStr :: Int
+    -- password <- generatePassword passwordLength
+    putStr "Generated password: "
+    -- print password
+    putStrLn $ generatePassword passwordLength
+    printDelimeter
+    putStrLn "Choose next Option:"
+    putStrLn "(1) Regenerate Password"
+    putStrLn "(2) Save Password"
+    putStrLn "(Any Other Number) Cancel Generating"
+    option <- getLine 
+    if option == "2" then return $ generatePassword passwordLength
+    else generateNewPassword option
+        -- where passwordLength = "222"
+
+generateNewPassword _ = return ""
 
 printDelimeter :: IO()
 printDelimeter = do
