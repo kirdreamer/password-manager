@@ -42,12 +42,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/bin"
-libdir     = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/lib/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0-7lICk12FMMfAlio6FIaF96-haskellprojekt"
-dynlibdir  = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/lib/aarch64-osx-ghc-9.4.5"
-datadir    = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/share/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0"
-libexecdir = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/libexec/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0"
-sysconfdir = "/Users/kira/VisualCodeProjects/HaskellProjekt/.stack-work/install/aarch64-osx/818e5d7d78002afe7465350b919cc61ef706104185cfb161039a83d66cf20b26/9.4.5/etc"
+bindir     = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/bin"
+libdir     = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/lib/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0-7lICk12FMMfAlio6FIaF96-haskellprojekt"
+dynlibdir  = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/lib/aarch64-osx-ghc-9.4.5"
+datadir    = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/share/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0"
+libexecdir = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/libexec/aarch64-osx-ghc-9.4.5/haskellprojekt-0.1.0.0"
+sysconfdir = "/Users/reiskanzler/Code/bht_workspace/puk/projekt/password-manager/.stack-work/install/aarch64-osx/4f50d891a536c895b918a2ddf98821a0ca70f4ab846bc5c0c959e77eb641b152/9.4.5/etc"
 
 getBinDir     = catchIO (getEnv "haskellprojekt_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "haskellprojekt_libdir")     (\_ -> return libdir)

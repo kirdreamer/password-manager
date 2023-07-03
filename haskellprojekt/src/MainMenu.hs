@@ -2,6 +2,7 @@ module MainMenu(callMenu) where
 
 import Password
 import PasswordGenerator
+import FileWriter
 
 callMenu :: [Char] -> IO ()
 callMenu "-1" = do
@@ -17,7 +18,7 @@ callMenu _ =
 
 printMenu :: IO()
 printMenu = do
-    printDelimeter
+    printDelimiter
     putStrLn "Welcome to Password-Generator\n"
     putStrLn "Please choose option:"
     putStrLn "(1) Generate a new Password"
@@ -32,9 +33,12 @@ passwordMenu "-1" = do
     passwordMenu num
 
 passwordMenu "1" = do
-    password <- fillPasswordInfo
-    print password
-    passwordMenu "-1"
+    passwordObj <- fillPasswordInfo
+    if (password passwordObj /= "") then do
+        result <- editOrCreateFile "vault.txt" (show passwordObj)
+        putStrLn result
+    else
+        passwordMenu "-1"
 
 
 passwordMenu _ = do
@@ -42,7 +46,7 @@ passwordMenu _ = do
 
 printGeneratePasswordMenu :: IO()
 printGeneratePasswordMenu = do
-    printDelimeter
+    printDelimiter
     putStrLn "Generate a new Password\n"
     putStrLn "Please choose option:"
     putStrLn "(1) Generate new password"
@@ -52,7 +56,7 @@ printGeneratePasswordMenu = do
 
 fillPasswordInfo :: IO Password
 fillPasswordInfo = do
-    printDelimeter
+    printDelimiter
     putStr "Title > "
     title <- getLine
     putStr "Login > "
@@ -64,11 +68,11 @@ fillPasswordInfo = do
 
 generatePasswordMenu :: String -> IO String
 generatePasswordMenu "1" = do 
-    printDelimeter
+    printDelimiter
     password <- generatePassword 
     putStr "Generated password: "
     putStrLn password
-    printDelimeter
+    printDelimiter
     putStrLn "Choose next Option:"
     putStrLn "(1) Regenerate Password"
     putStrLn "(2) Save Password"
@@ -79,6 +83,6 @@ generatePasswordMenu "1" = do
 
 generatePasswordMenu _ = return ""
 
-printDelimeter :: IO()
-printDelimeter = do
+printDelimiter :: IO()
+printDelimiter = do
     putStrLn "\n----------------------------\n"
