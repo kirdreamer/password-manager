@@ -1,11 +1,11 @@
 module PasswordGenerator(generatePassword) where
 
-import System.Random
+import Data.Time.Clock.POSIX
 import System.IO.Unsafe
+import System.Random
 
--- Generate a random password of given length
-generatePassword :: Int -> String
-generatePassword length = take length $ randomChars charsGenerator
+generateNewPassword :: Int -> String
+generateNewPassword length = take length $ randomChars charsGenerator
   where
     randomChars :: [a] -> [a]
     randomChars xs = unsafePerformIO $ shuffle xs
@@ -13,7 +13,6 @@ generatePassword length = take length $ randomChars charsGenerator
     charsGenerator :: String
     charsGenerator = ['a'..'z'] ++ ['A'..'Z'] ++ ['0'..'9']
 
--- Shuffle a list using Fisher-Yates algorithm
 shuffle :: [a] -> IO [a]
 shuffle xs = do
   g <- getStdGen
@@ -28,10 +27,17 @@ shuffle xs = do
           (shuffled, finalGen) = shuffle' newGen (rest ++ ys)
       in (y : shuffled, finalGen)
 
--- Usage example
-main :: IO ()
-main = do
-  putStrLn "Enter the length of the password:"
+getCurrentTimestamp :: IO Int
+getCurrentTimestamp = round <$> getPOSIXTime
+
+generatePassword :: IO String
+generatePassword = do
+  putStr "Enter the length of the password > "
   lengthStr <- getLine
   let passwordLength = read lengthStr :: Int
-  putStrLn $ "Generated password: " ++ generatePassword passwordLength
+
+  timestamp <- getCurrentTimestamp
+  let seed = timestamp `mod` 1000000  -- Use the last 6 digits of the timestamp as the seed
+  setStdGen (mkStdGen seed)
+
+  return $ generateNewPassword passwordLength

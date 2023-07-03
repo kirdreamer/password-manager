@@ -1,5 +1,3 @@
-
-
 module MainMenu(callMenu) where
 
 import Password
@@ -61,30 +59,25 @@ fillPasswordInfo = do
     login <- getLine
     putStr "Url > "
     url <- getLine
-    password <- generateNewPassword "1"
+    password <- generatePasswordMenu "1"
     return Password {title = title, login = login, url = url, password = password}
 
-generateNewPassword :: String -> IO String
-generateNewPassword "1" = do 
+generatePasswordMenu :: String -> IO String
+generatePasswordMenu "1" = do 
     printDelimeter
-    putStr "Enter the length of the password >"
-    lengthStr <- getLine
-    let passwordLength = read lengthStr :: Int
-    -- password <- generatePassword passwordLength
+    password <- generatePassword 
     putStr "Generated password: "
-    -- print password
-    putStrLn $ generatePassword passwordLength
+    putStrLn password
     printDelimeter
     putStrLn "Choose next Option:"
     putStrLn "(1) Regenerate Password"
     putStrLn "(2) Save Password"
     putStrLn "(Any Other Number) Cancel Generating"
     option <- getLine 
-    if option == "2" then return $ generatePassword passwordLength
-    else generateNewPassword option
-        -- where passwordLength = "222"
+    if option == "2" then return password
+    else generatePasswordMenu option
 
-generateNewPassword _ = return ""
+generatePasswordMenu _ = return ""
 
 printDelimeter :: IO()
 printDelimeter = do
